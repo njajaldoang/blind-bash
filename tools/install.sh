@@ -643,17 +643,13 @@ sleep 2
 
   echo "Create symbolic link..."
 
-  ln -s "$BLIND/blind-bash.sh" "$PATH/blind-bash" >/dev/null 2>&1 || {
-    fmt_info "cannot create symbolic link $BLIND/blind-bash.sh as $PATH/blind-bash"
+  ln -s "$BLIND/blind-bash.sh" "$PATH/bb-enc" >/dev/null 2>&1 || {
+    fmt_info "cannot create symbolic link $BLIND/blind-bash.sh as $PATH/bb-enc"
     exit 1
   }
   
-  fmt_info "create symbolic link $BLIND/blind-bash.sh as $PATH/blind-bash success ✓"
-  print "Contoh command < blind-bash halo.sh >"
-  echo "blind-bash /root/halo.sh"
-  echo "blind-bash /storage/emulated/0/halo.sh"
-  echo ""
-  sleep 2
+  fmt_info "create symbolic link $BLIND/blind-bash.sh as $PATH/bb-enc success ✓"
+  sleep 1
 
   ln -s "$BLIND/tools/upgrade.sh" "$PATH/bb-upgrade" >/dev/null 2>&1 || {
     fmt_info "cannot create symbolic link $BLIND/tools/upgrade.sh as $PATH/bb-upgrade"
@@ -661,7 +657,7 @@ sleep 2
   }
   
   fmt_info "create symbolic link $BLIND/tools/upgrade.sh as $PATH/bb-upgrade success ✓"
-  sleep 2
+  sleep 1
 
   ln -s "$BLIND/tools/uninstall.sh" "$PATH/bb-uninstall" >/dev/null 2>&1 || {
     fmt_info "cannot create symbolic link $BLIND/tools/uninstall.sh as $PATH/bb-uninstall"
@@ -674,7 +670,9 @@ sleep 2
   fmt_info "create symbolic link success kabeh ✓"
   sleep 3
 }
+
 message="Hooray! Blind Bash has been installed 😁!"
+
 print_success() {
   printf '%s\n' "${BOLD}${message}"
   printf '%s\n' "${BOLD}    __    ___           __      __               __"
@@ -687,10 +685,10 @@ print_success() {
   printf >&2 '%s\n' "• Telegram : $(fmt_link @Crystalllz https://t.me/Crystalllz)"
   printf >&2 '%s\n' "• WhatsApp : $(fmt_link +6281383460513 https://wa.me/6285659850910)"
   printf >&2 '%s\n' "• E-mail   : yadicakepp@gmail.com${RESET}"
-
-  print "Contoh command < blind-bash halo.sh >"
-  echo "blind-bash /root/halo.sh"
-  echo "blind-bash /storage/emulated/0/halo.sh"
+  echo ""
+  print "Contoh command < bb-enc halo.sh >"
+  echo "bb-enc /root/halo.sh"
+  echo "bb-enc /storage/emulated/0/halo.sh"
   echo ""
   sleep 2
 }
@@ -702,7 +700,6 @@ main() {
     echo "You'll need to remove it if you want to reinstall."
     exit 1
   fi
-
   install_blind
   setup_blind
   print_success

@@ -226,10 +226,10 @@ print_success() {
   printf >&2 '%s\n' "• Telegram : $(fmt_link @Crystalllz https://t.me/Crystalllz)"
   printf >&2 '%s\n' "• WhatsApp : $(fmt_link +6281383460513 https://wa.me/6285659850910)"
   printf >&2 '%s\n' "• E-mail   : yadicakepp@gmail.com${RESET}"
-
-  print "Contoh command < blind-bash halo.sh >"
-  echo "blind-bash /root/halo.sh"
-  echo "blind-bash /storage/emulated/0/halo.sh"
+  echo ""
+  print "Contoh command < bb-enc halo.sh >"
+  echo "bb-enc /root/halo.sh"
+  echo "bb-enc /storage/emulated/0/halo.sh"
   echo ""
   sleep 2
 }

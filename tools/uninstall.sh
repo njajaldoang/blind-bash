@@ -24,10 +24,10 @@ if test "$confirmation" != y && test "$confirmation" != Y; then
   exit
 fi
 
-if command -v "blind-bash" >/dev/null 2>&1; then
-  if test -f `command -v "blind-bash"` || test -x `command -v "blind-bash"`; then
-    echo "Removing `command -v 'blind-bash'`"
-    rm -rf `command -v "blind-bash"` >/dev/null 2>&1 || rm -rf `command -v "blind-bash"` >/dev/null 2>&1
+if command -v "bb-enc" >/dev/null 2>&1; then
+  if test -f `command -v "bb-enc"` || test -x `command -v "bb-enc"`; then
+    echo "Removing `command -v 'bb-enc'`"
+    rm -rf `command -v "bb-enc"` >/dev/null 2>&1 || rm -rf `command -v "bb-enc"` >/dev/null 2>&1
   fi
 fi
 if command -v "bb-upgrade" >/dev/null 2>&1; then
