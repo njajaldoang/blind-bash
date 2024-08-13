@@ -42,7 +42,7 @@ echo ""
 echo "*****************************************************"
 echo "*            Not Open Source @Crystalllz            *"
 echo "*****************************************************"
-echo "*                 ENCRYPT SHELL                  *"
+echo "*               ENCRYPT SHELL SCRIPT                 *"
 echo "*                      Author                       *"
 echo "*                Mas Triadzz Ganteng                *"
 echo "* Telegram: t.me/Crystalllz | Github: Yaddy Kakkoii *"
@@ -564,16 +564,6 @@ install_blind() {
 setup_blind() {
 clear
 
-check_path(){
-    if [ -d /data/data/com.termux/files ]; then
-        PATH=/data/data/com.termux/files/bin
-        print "Your path: $PATH ✓"
-    else
-        PATH=/usr/bin
-        print "Your path: $PATH ✓"
-    fi
-}
-
 check_file_utama(){
     if [ -f $BLIND/blind-bash.sh ]; then
         chmod -x "$BLIND/blind-bash.sh"
@@ -601,16 +591,14 @@ check_file_uninstall(){
     fi
 }
 
-  print " Checking directory $PATH"
-  check_path
-  test -d "$PATH" && test -w "$PATH" && test -x "$PATH" || {
-    #PATH=/data/data/com.termux/files/usr/bin
-    test -d "$PATH" && test -w "$PATH" && test -x "$PATH" || {
-      fmt_info "no such directory \$PATH !!"
-      exit 1
-    }
-  }
-sleep 2
+  print " Checking directory $PATH ....."
+  if [ -d /data/data/com.termux/files ]; then
+      PATH=/data/data/com.termux/files/bin
+  else
+      PATH=/usr/bin
+  fi
+  print "Your path: $PATH ✓"
+sleep 1
   print " Checking file blind-bash.sh "
   check_file_utama
   test -x "$BLIND/blind-bash.sh" || test -f "$BLIND/blind-bash.sh" || {
@@ -620,7 +608,7 @@ sleep 2
       exit 1
     }
   }
-sleep 2
+sleep 1
   print " Checking file upgrade.sh "
   check_file_upgrade
   test -x "$BLIND/tools/upgrade.sh" || test -f "$BLIND/tools/upgrade.sh" || {
@@ -630,7 +618,7 @@ sleep 2
       exit 1
     }
   }
-sleep 2
+sleep 1
   print " Checking file uninstall.sh "
   check_file_uninstall
   test -x "$BLIND/tools/uninstall.sh" || test -f "$BLIND/tools/uninstall.sh" || {
@@ -640,7 +628,7 @@ sleep 2
       exit 1
     }
   }
-sleep 2
+sleep 1
 
   echo "Create symbolic link..."
 
@@ -650,7 +638,6 @@ sleep 2
   }
   
   fmt_info "create symbolic link $BLIND/blind-bash.sh as $PATH/bb-enc success ✓"
-  sleep 1
 
   ln -s "$BLIND/tools/upgrade.sh" "$PATH/bb-upgrade" >/dev/null 2>&1 || {
     fmt_info "cannot create symbolic link $BLIND/tools/upgrade.sh as $PATH/bb-upgrade"
@@ -658,7 +645,6 @@ sleep 2
   }
   
   fmt_info "create symbolic link $BLIND/tools/upgrade.sh as $PATH/bb-upgrade success ✓"
-  sleep 1
 
   ln -s "$BLIND/tools/uninstall.sh" "$PATH/bb-uninstall" >/dev/null 2>&1 || {
     fmt_info "cannot create symbolic link $BLIND/tools/uninstall.sh as $PATH/bb-uninstall"
@@ -666,7 +652,6 @@ sleep 2
   }
 
   fmt_info "create symbolic link $BLIND/tools/uninstall.sh as $PATH/bb-uninstall success ✓"
-  sleep 2
   
   fmt_info "create symbolic link success kabeh ✓"
   sleep 3
