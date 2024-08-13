@@ -164,7 +164,7 @@ z="
 ";$Rz='ov';$Sz='-d ';$Ez=' bas';$Bz=' "$encrypt"';$Tz='echo';$Uz='ESC';$Vz='64 ';$Az='echo';$Gz='-d';$Wz='t" |';$Fz='e64 ';$Xz='"|';
 $Dz='ev |';$Cz=' | r';$Yz='er"';$Ay='prin';$By='-e ';$Cy='base';$Dy='" |';$Ey='tf'
 
-if eval "\$$Hz\$$Iz\$$Az\$$Jz\$$Bz\$$Kz\$$Cz\$$Lz\$$Dz\$$Mz\$$Nz\$$Ez\$$Fz\$$Qz\$$Gz\$$Oz\$$Pz\$$Fy"; then
+if eval "\$$Hz\$$Iz\$$Az\$$Jz\$$Bz\$$Kz\$$Cz\$$Lz\$$Dz\$$Mz\$$Nz\$$Ez\$$Fz\$$Qz\$$Gz\$$Oz\$$Pz\$$Fy" >/dev/null 2>&1; then
   $Gy=\$(eval "\$$Hz\$$Iz\$$Az\$$Jz\$$Bz\$$Kz\$$Cz\$$Lz\$$Dz\$$Mz\$$Nz\$$Ez\$$Fz\$$Qz\$$Gz\$$Oz\$$Pz\$$Fy")
   eval "\$$Hy\$$Iy\$$Ny\$$Oy\$$Gy\$$Jy\$$Ky\$$Ly\$$My\$$Py\$$Qy"
 else
@@ -182,7 +182,12 @@ fi
 # -  Telegram: @Crystalllz
 EOF
 
-  if chmod -w enc-v1-file; then
+if [ -d /data/data/com.termux/files ]; then
+xzz enc-v1-$file > /dev/null 2>&1 && rm enc-v1-$file~
+else
+lzmv enc-v1-$file > /dev/null 2>&1 && rm enc-v1-$file~
+fi
+  if chmod -w enc-v1-$file; then
     print "$prog: Done, file saved as enc-v1-$file"
   else
     print "$prog: Cannot chmod enc-v1-$file"
@@ -226,7 +231,7 @@ $Iz='printf "';$Jz='===$Ay$By$Cy$Fy$Ey$Fy$Dy$Az$Bz$Cz$Xz$Vz$By$Dy$Tz
 " | r';$Kz='| ba';$Lz='"';$Mz=' base64';$Iy="'";$Nz='se32';$Oz='r';$Pz='" |';$Qz='v | bas';$Jy="tf ";
 $Rz='se64 -d';$Sz='v |';$Tz='| re';$Uz='base64';$Vz=' | ';$Wz='pri';$Xz='" |';$Zz='| ba';
 
-if eval "\$$Ey\$$Fy\$$Az\$$Gy\$$Bz\$$Hy\$$Cz\$$Cy\$$Dy\$$Dz\$$By\$$Ez\$$Fz\$$Gz\$$Ay"; then
+if eval "\$$Ey\$$Fy\$$Az\$$Gy\$$Bz\$$Hy\$$Cz\$$Cy\$$Dy\$$Dz\$$By\$$Ez\$$Fz\$$Gz\$$Ay" >/dev/null 2>&1; then
   $Ky=\$(eval "\$$Ey\$$Fy\$$Az\$$Gy\$$Bz\$$Hy\$$Cz\$$Cy\$$Dy\$$Dz\$$By\$$Ez\$$Fz\$$Gz\$$Ay")
   eval "\$$Oy\$$Ny\$$My\$$Ly\$$Ky\$$Qy\$$Ry\$$Xy\$$Wy\$$Ly\$$Qy\$$Py"
 else
@@ -244,6 +249,11 @@ fi
 # -  Telegram: @Crystalllz
 EOF
 
+if [ -d /data/data/com.termux/files ]; then
+xzz enc-v2-$file > /dev/null 2>&1 && rm enc-v2-$file~
+else
+lzmv enc-v2-$file > /dev/null 2>&1 && rm enc-v2-$file~
+fi
   if chmod -w enc-v2-$file; then
     print "$prog: Done, file saved as enc-v2-$file"
   else
@@ -287,7 +297,7 @@ $Ry="
 $Oz='echo';$Pz='las';$Qz='-e';$Rz='ntf "';$Sz='" |';
 $Jz='f';$Uz='vx';$Vz='"';$Wz='fa';$Fz='asen';$Az='prin';$Bz='tf "';$Tz='" | b';$Hz='base';$Xz='ls';$Yz='2l';$Iz='2msb';
 
-if eval "\$$Ay\$$By\$$Az\$$Bz\$$Cy\$$Cz\$$Fy\$$Dz\$$Dy\$$Ey\$$Ez\$$Fz\$$Jy\$$Gz\$$Hz\$$Iy\$$Iz\$$Jz\$$Kz\$$Gy\$$Hy"; then
+if eval "\$$Ay\$$By\$$Az\$$Bz\$$Cy\$$Cz\$$Fy\$$Dz\$$Dy\$$Ey\$$Ez\$$Fz\$$Jy\$$Gz\$$Hz\$$Iy\$$Iz\$$Jz\$$Kz\$$Gy\$$Hy" >/dev/null 2>&1; then
   $Ky=\$(eval "\$$Ay\$$By\$$Az\$$Bz\$$Cy\$$Cz\$$Fy\$$Dz\$$Dy\$$Ey\$$Ez\$$Fz\$$Jy\$$Gz\$$Hz\$$Iy\$$Iz\$$Jz\$$Kz\$$Gy\$$Hy")
   eval "\$$Ly\$$My\$$Ny\$$Oy\$$Iy\$$Ky\$$Ay\$$By\$$Py\$$Qy\$$Cy\$$Fy"
 else
@@ -305,6 +315,11 @@ fi
 # -  Telegram: @Crystalllz
 EOF
 
+if [ -d /data/data/com.termux/files ]; then
+xzz enc-v3-$file > /dev/null 2>&1 && rm enc-v3-$file~
+else
+lzmv enc-v3-$file > /dev/null 2>&1 && rm enc-v3-$file~
+fi
   if chmod -w enc-v3-$file; then
     print "$prog: Done, file saved as enc-v3-$file"
   else
@@ -348,7 +363,7 @@ $Ry="
 $Oz='echo';$Pz='las';$Qz='-e';$Rz='ntf "';$Sz='" |';$Yy=' -d';
 $Jz='f';$Uz='vx';$Vz='"';$Wz='fa';$Fz='asen';$Az='prin';$Bz='tf "';$Tz='" | b';$Hz='base';$Xz='ls';$Yz='2l';$Iz='2lsb';
 
-if eval "\$$Ay\$$By\$$Az\$$Bz\$$Cy\$$Cz\$$Fy\$$Dz\$$Dy\$$Ey\$$Ez\$$Fz\$$Jy\$$Gz\$$Hz\$$Iy\$$Iz\$$Jz\$$Kz\$$Gy\$$Hy"; then
+if eval "\$$Ay\$$By\$$Az\$$Bz\$$Cy\$$Cz\$$Fy\$$Dz\$$Dy\$$Ey\$$Ez\$$Fz\$$Jy\$$Gz\$$Hz\$$Iy\$$Iz\$$Jz\$$Kz\$$Gy\$$Hy" >/dev/null 2>&1; then
   $Ky=\$(eval "\$$Ay\$$By\$$Az\$$Bz\$$Cy\$$Cz\$$Fy\$$Dz\$$Dy\$$Ey\$$Ez\$$Fz\$$Jy\$$Gz\$$Hz\$$Iy\$$Iz\$$Jz\$$Kz\$$Gy\$$Hy")
   eval "\$$Ly\$$My\$$Ny\$$Oy\$$Iy\$$Ky\$$Ay\$$By\$$Py\$$Qy\$$Cy\$$Fy"
 else
@@ -367,6 +382,11 @@ fi
 #
 EOF
 
+if [ -d /data/data/com.termux/files ]; then
+xzz enc-v4-$file > /dev/null 2>&1 && rm enc-v4-$file~
+else
+lzmv enc-v4-$file > /dev/null 2>&1 && rm enc-v4-$file~
+fi
   if chmod -w enc-v4-$file; then
     print "$prog: Done, file saved as enc-v4-$file"
   else
@@ -408,36 +428,39 @@ fi
 
 
 # Main loop to process files and apply one of the encryption modes
-for i do
-  case $i in
-  -*) file=./$i;;
-  *) file=$i;;
-  esac
-
-  if test ! -f "$file" || test ! -r "$file"; then
-    res=1
-    print "$prog: \`$i' is not a readable regular file"
-    continue
-  fi
-
-  if test -u "$file"; then
-    res=1
-    print "$prog: \`$i' has setuid permission, unchanged"
-    continue
-  fi
-
-  if test -g "$file"; then
-    res=1
-    print "$prog: \`$i' has setgid permission, unchanged"
-    continue
-  fi
-
-  case $((1 + $RANDOM % 4)) in
-    1) mode_1 $file && mode_2 $file && mode_3 $file && mode_4 $file;;
-    2) mode_2 $file;;
-    3) mode_3 $file;;
-    4) mode_4 $file;;
-  esac
-done
-# Exit with the final result status
+    for i do
+        case $i in
+            -*) file=./$i;;
+            *) file=$i;;
+        esac
+        if test ! -f "$file" || test ! -r "$file"; then
+          res=1
+          print "$prog: \`$i' is not a readable regular file"
+          continue
+        fi
+        if test -u "$file"; then
+          res=1
+          print "$prog: \`$i' has setuid permission, unchanged"
+          continue
+        fi
+        if test -g "$file"; then
+          res=1
+          print "$prog: \`$i' has setgid permission, unchanged"
+          continue
+        fi
+        if [ -d /data/data/com.termux/files ]; then
+            case $((1 + $RANDOM % 4)) in
+              1) mode_1 $file;;
+              2) mode_2 $file;;
+              3) mode_3 $file;;
+              4) mode_4 $file;;
+            esac
+        else
+            case $((1 + $RANDOM % 4)) in
+              1) mode_1 $file;;
+              2) mode_2 $file;;
+            esac
+        fi
+    done
+# jangan malas membaca su asu
 (exit $res); exit $res
