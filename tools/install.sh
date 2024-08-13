@@ -515,13 +515,14 @@ fmt_link() {
 
 install_blind() {
   echo ""
-  echo " Mulai Menginstall blind bash script "
-  echo ""
   print " Prevent the cloned repository from having insecure permissions. Failing to do "
   print "  so causes compinit() calls to fail with <command not found: compdef> errors"
   print "  for users with insecure umasks (e.g., <002>, allowing group writability). Note"
   print "  that this will be ignored under Cygwin by default, as Windows ACLs take"
   print "  precedence over umasks except for filesystems mounted with option <noacl> "
+  sleep 1
+  echo ""
+  echo " Mulai Menginstall blind bash script "
   sleep 3
   clear
   umask g-w,o-w
@@ -674,6 +675,7 @@ sleep 2
 message="Hooray! Blind Bash has been installed 😁!"
 
 print_success() {
+bb-enc -v
   printf '%s\n' "${BOLD}${message}"
   printf '%s\n' "${BOLD}    __    ___           __      __               __"
   printf '%s\n' '   / /_  / (_)___  ____/ /     / /_  ____ ______/ /_'
@@ -686,15 +688,19 @@ print_success() {
   printf >&2 '%s\n' "• WhatsApp : $(fmt_link +6281383460513 https://wa.me/6285659850910)"
   printf >&2 '%s\n' "• E-mail   : yadicakepp@gmail.com${RESET}"
   echo ""
-  print "Contoh command < bb-enc halo.sh >"
+  print "Contoh command < bb-enc -f halo.sh >"
   echo ""
-  echo "bb-enc /root/halo.sh"
-  echo "bb-enc /storage/emulated/0/halo.sh"
+  echo "bb-enc -f /root/halo.sh"
+  echo "bb-enc -f /storage/emulated/0/halo.sh"
   echo ""
   chmod 777 /usr/bin/bb-enc
   chmod 777 /usr/bin/bb-upgrade
   chmod 777 /usr/bin/bb-uninstall
   sleep 2
+  
+blind-bash.sh -f FILE
+#bb-enc --uninstall
+#bb-enc --upgrade
 }
 
 main() {
