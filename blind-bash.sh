@@ -133,6 +133,7 @@ function mode_1() {
   local file="$1"
 
   if base64 $file >/dev/null 2>&1; then
+    #local enc=$(base64 -w0 $file)
     local enc=$(base64 $file | sed ':a;N;$!ba;s/\n//g')
   else
     print "$prog: Error encrypt file $file"
@@ -146,7 +147,7 @@ function mode_1() {
   cat <<EOF > enc-$file
 #!/bin/bash
 #
-# vscode
+# vscode 1
 # coding=utf-8
 # ======================================= #
 # HAPUS CREDIT GUA EBOL LU                #
@@ -206,7 +207,7 @@ function mode_2() {
   cat <<EOF > enc-$file
 #!/bin/bash
 #
-# vscode
+# vscode 2
 # coding=utf-8
 # ======================================= #
 # HAPUS CREDIT GUA EBOL LU                #
@@ -268,7 +269,7 @@ function mode_3() {
   cat <<EOF > enc-$file
 #!/bin/bash
 #
-# vscode
+# vscode 3
 # coding=utf-8
 # ======================================= #
 # HAPUS CREDIT GUA EBOL LU                #
@@ -329,7 +330,7 @@ function mode_4() {
   cat <<EOF > enc-$file
 #!/bin/bash
 #
-# vscode
+# vscode 4
 # coding=utf-8
 # ======================================= #
 # HAPUS CREDIT GUA EBOL LU                #
