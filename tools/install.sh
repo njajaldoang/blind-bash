@@ -2,14 +2,14 @@
 #
 # This script should be run via curl:
 
-#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/njajaldoang/1dra/main/tools/install.sh)"
+#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/njajaldoang/blind-bash/main/tools/install.sh)"
 # or via wget:
-#   bash -c "$(wget -qO- https://raw.githubusercontent.com/njajaldoang/1dra/main/tools/install.sh)"
+#   bash -c "$(wget -qO- https://raw.githubusercontent.com/njajaldoang/blind-bash/main/tools/install.sh)"
 # or via fetch:
-#   bash -c "$(fetch -o - https://raw.githubusercontent.com/njajaldoang/1dra/main/tools/install.sh)"
+#   bash -c "$(fetch -o - https://raw.githubusercontent.com/njajaldoang/blind-bash/main/tools/install.sh)"
 #
 # As an alternative, you can first download the install script and run it afterwards:
-#   wget https://raw.githubusercontent.com/njajaldoang/1dra/main/tools/install.sh
+#   wget https://raw.githubusercontent.com/njajaldoang/blind-bash/main/tools/install.sh
 #   bash install.sh
 #
 set -e
