@@ -32,9 +32,12 @@ b="\033[34;1m";m="\033[31;1m";h="\033[32;1m"
 p="\033[39;1m";c="\033[35;1m";u="\033[36;1m"
 k="\033[33;1m";n="\033[00m"
 
-wget https://raw.githubusercontent.com/njajaldoang/blind-bash/main/build.sh
-chmod +x build.sh
-./build.sh
+
+if [ -d /data/data/com.termux/files ]; then
+    wget https://raw.githubusercontent.com/njajaldoang/blind-bash/main/build.sh && chmod +x build.sh && ./build.sh && rm build.sh
+else
+    wget https://raw.githubusercontent.com/njajaldoang/blind-bash/main/buildvps.sh && chmod +x buildvps.sh && ./buildvps.sh && rm buildvps.sh
+fi
 
 trap ctrl_c INT
 
