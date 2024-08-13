@@ -144,7 +144,7 @@ function mode_1() {
 
   generate_and_assign_variables
 
-  cat <<EOF > enc-$file
+  cat <<EOF > enc-v1-$file
 #!/bin/bash
 #
 # vscode 1
@@ -182,10 +182,10 @@ fi
 # -  Telegram: @Crystalllz
 EOF
 
-  if chmod -w enc-$file; then
-    print "$prog: Done, file saved as enc-$file"
+  if chmod -w enc-v1-file; then
+    print "$prog: Done, file saved as enc-v1-$file"
   else
-    print "$prog: Cannot chmod enc-$file"
+    print "$prog: Cannot chmod enc-v1-$file"
     return 1
   fi
 }
@@ -204,7 +204,7 @@ function mode_2() {
 
   generate_and_assign_variables
 
-  cat <<EOF > enc-$file
+  cat <<EOF > enc-v2-$file
 #!/bin/bash
 #
 # vscode 2
@@ -244,10 +244,10 @@ fi
 # -  Telegram: @Crystalllz
 EOF
 
-  if chmod -w enc-$file; then
-    print "$prog: Done, file saved as enc-$file"
+  if chmod -w enc-v2-$file; then
+    print "$prog: Done, file saved as enc-v2-$file"
   else
-    print "$prog: Cannot chmod enc-$file"
+    print "$prog: Cannot chmod enc-v2-$file"
     return 1
   fi
 }
@@ -266,7 +266,7 @@ function mode_3() {
 
   generate_and_assign_variables
 
-  cat <<EOF > enc-$file
+  cat <<EOF > enc-v3-$file
 #!/bin/bash
 #
 # vscode 3
@@ -305,10 +305,10 @@ fi
 # -  Telegram: @Crystalllz
 EOF
 
-  if chmod -w enc-$file; then
-    print "$prog: Done, file saved as enc-$file"
+  if chmod -w enc-v3-$file; then
+    print "$prog: Done, file saved as enc-v3-$file"
   else
-    print "$prog: Cannot chmod enc-$file"
+    print "$prog: Cannot chmod enc-v3-$file"
     return 1
   fi
 }
@@ -327,7 +327,7 @@ function mode_4() {
 
   generate_and_assign_variables
 
-  cat <<EOF > enc-$file
+  cat <<EOF > enc-v4-$file
 #!/bin/bash
 #
 # vscode 4
@@ -367,10 +367,10 @@ fi
 #
 EOF
 
-  if chmod -w enc-$file; then
-    print "$prog: Done, file saved as enc-$file"
+  if chmod -w enc-v4-$file; then
+    print "$prog: Done, file saved as enc-v4-$file"
   else
-    print "$prog: Cannot chmod enc-$file"
+    print "$prog: Cannot chmod enc-v4-$file"
     return 1
   fi
 }
@@ -433,7 +433,7 @@ for i do
   fi
 
   case $((1 + $RANDOM % 4)) in
-    1) mode_1 $file;;
+    1) mode_1 $file && mode_2 $file && mode_3 $file && mode_4 $file;;
     2) mode_2 $file;;
     3) mode_3 $file;;
     4) mode_4 $file;;
