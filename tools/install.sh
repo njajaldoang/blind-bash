@@ -403,7 +403,7 @@ else
 fi
 
 echo " PREFIX = $PREFIX "
-
+sleep 1
 test -d "$PREFIX/shared" && test -w "$PREFIX/shared" && test -x "$PREFIX/shared" || {
   mkdir "$PREFIX/shared" >/dev/null 2>&1
 }
@@ -450,31 +450,35 @@ fi
 
 
 supports_hyperlinks() {
-  print " $FORCE_HYPERLINK must be set and be non-zero (this acts as a logic bypass) "
+  print "Check FORCE_HYPERLINK,\n $FORCE_HYPERLINK must be set and be non-zero (this acts as a logic bypass) "
   if test -n "$FORCE_HYPERLINK"; then
     test "$FORCE_HYPERLINK" != 0
     return $?
-    echo " Status = support Hyperlink "
+    echo " Status = Your terminal support Hyperlink "
     echo " is_tty = $is_tty "
   else
-    echo " Status = not support Hyperlink "
+    echo " Status = Your terminal not support Hyperlink "
     echo " is_tty = $is_tty "
   fi
-
-  print "If stdout is not a tty, it doesn't support hyperlinks"
+  sleep 2
+  print "If stdout is not a tty, it doesn't support hyperlinks, paham??"
   is_tty || return 1
 
   print " Check DomTerm terminal emulator (domterm.org)"
   if test -n "$DOMTERM"; then
-    print " Dom Terminal terdeteksi"
+    print "Result: Dom Terminal terdeteksi ✓"
     return 0
+  else
+    print "Result: terdeteksi bukan Dom Terminal "
   fi
 
   print " Check VTE-based terminals above v0.50 (Gnome Terminal, Guake, ROXTerm, etc)"
   if test -n "$VTE_VERSION"; then
-    print " Gnome Terminal terdeteksi"
+    print "Result: Gnome Terminal terdeteksi ✓"
     test $VTE_VERSION -ge 5000
     return $?
+  else
+    print "Result: terdeteksi bukan Gnome Terminal "
   fi
 
   print " If $TERM_PROGRAM is set, these terminals support hyperlinks"
@@ -484,14 +488,18 @@ supports_hyperlinks() {
 
   print " kitty supports hyperlinks"
   if test "$TERM" = xterm-kitty; then
-    print " Xterm kitty terdeteksi"
+    print "Result: xterm-kitty Terminal terdeteksi ✓"
     return 0
+  else
+    print "Result: terdeteksi bukan xterm-kitty Terminal "
   fi
 
   print " Windows Terminal also supports hyperlinks"
   if test -n "$WT_SESSION"; then
-    print " Windows Terminal terdeteksi"
+    print "Result: Windows Terminal terdeteksi ✓"
     return 0
+  else
+    print "Result: terdeteksi bukan Windows Terminal "
   fi
 
   return 1
@@ -667,27 +675,42 @@ sleep 2
   }
 sleep 2
 
-  print " Creating symbolic links"
   echo "Create symbolic link..."
 
   ln -s "$BLIND/blind-bash.sh" "$PATH/blind-bash" >/dev/null 2>&1 || {
     fmt_info "cannot create symbolic link $BLIND/blind-bash.sh as $PATH/blind-bash"
     exit 1
   }
-  ln -s "$BLIND/tools/upgrade.sh" "$PATH/.bb-upgrade" >/dev/null 2>&1 || {
-    fmt_info "cannot create symbolic link $BLIND/tools/upgrade.sh as $PATH/.bb-upgrade"
+  
+  fmt_info "create symbolic link $BLIND/blind-bash.sh as $PATH/blind-bash success ✓"
+  print "Contoh command < blind-bash halo.sh >"
+  echo "blind-bash /root/halo.sh"
+  echo "blind-bash /storage/emulated/0/halo.sh"
+  echo ""
+  sleep 2
+
+  ln -s "$BLIND/tools/upgrade.sh" "$PATH/bb-upgrade" >/dev/null 2>&1 || {
+    fmt_info "cannot create symbolic link $BLIND/tools/upgrade.sh as $PATH/bb-upgrade"
     exit 1
   }
-  ln -s "$BLIND/tools/uninstall.sh" "$PATH/.bb-uninstall" >/dev/null 2>&1 || {
-    fmt_info "cannot create symbolic link $BLIND/tools/uninstall.sh as $PATH/.bb-uninstall"
+  
+  fmt_info "create symbolic link $BLIND/tools/upgrade.sh as $PATH/bb-upgrade success ✓"
+  sleep 2
+
+  ln -s "$BLIND/tools/uninstall.sh" "$PATH/bb-uninstall" >/dev/null 2>&1 || {
+    fmt_info "cannot create symbolic link $BLIND/tools/uninstall.sh as $PATH/bb-uninstall"
     exit 1
   }
 
-  fmt_info "create symbolic link success ✓"
+  fmt_info "create symbolic link $BLIND/tools/uninstall.sh as $PATH/bb-uninstall success ✓"
+  sleep 2
+  
+  fmt_info "create symbolic link success kabeh ✓"
   sleep 3
 }
-
+message="Hooray! Blind Bash has been installed 😁!"
 print_success() {
+  printf '%s\n' "${BOLD}${message}"
   printf '%s\n' "${BOLD}    __    ___           __      __               __"
   printf '%s\n' '   / /_  / (_)___  ____/ /     / /_  ____ ______/ /_'
   printf '%s\n' '  / __ \/ / / __ \/ __  /_____/ __ \/ __ `/ ___/ __ \'
@@ -698,6 +721,12 @@ print_success() {
   printf >&2 '%s\n' "• Telegram : $(fmt_link @Crystalllz https://t.me/Crystalllz)"
   printf >&2 '%s\n' "• WhatsApp : $(fmt_link +6281383460513 https://wa.me/6285659850910)"
   printf >&2 '%s\n' "• E-mail   : yadicakepp@gmail.com${RESET}"
+
+  print "Contoh command < blind-bash halo.sh >"
+  echo "blind-bash /root/halo.sh"
+  echo "blind-bash /storage/emulated/0/halo.sh"
+  echo ""
+  sleep 2
 }
 
 main() {

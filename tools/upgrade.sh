@@ -1,19 +1,7 @@
 #!/bin/bash
-# Make sure important variables exist if not already defined
-# $USER is defined by login(1) which is not always executed (e.g. containers)
-# POSIX: https://pubs.opengroup.org/onlinepubs/009695299/utilities/id.html
 USER=${USER:-$(id -u -n)}
-# $HOME is defined at the time of login, but it could be unset. If it is unset,
-# a tilde by itself (~) will not be expanded to the current user's home directory.
-# POSIX: https://pubs.opengroup.org/onlinepubs/009696899/basedefs/xbd_chap08.html#tag_08_03
 HOME="${HOME:-$(getent passwd $USER 2>/dev/null | cut -d: -f6)}"
-# macOS does not have getent, but this works even if $HOME is unset
 HOME="${HOME:-$(eval echo ~$USER)}"
-
-# Test directory '/data/data/com.termux/files/usr'
-test -d "$PREFIX" && test -w "$PREFIX" && test -x "$PREFIX" || test -d /data/data/com.termux/files/usr && test -w /data/data/com.termux/files/usr && test -x /data/data/com.termux/files/usr || {
-  mkdir "/data/data/com.termux/files/usr" >/dev/null 2>&1
-}
 
 if [ -d /data/data/com.termux/files ]; then
     PREFIX=/data/data/com.termux/files/usr
@@ -21,14 +9,16 @@ else
     PREFIX=/usr
 fi
 
-# Test directory '/data/data/com.termux/files/usr/shared'
+test -d "$PREFIX" && test -w "$PREFIX" && test -x "$PREFIX" || test -d /data/data/com.termux/files/usr && test -w /data/data/com.termux/files/usr && test -x /data/data/com.termux/files/usr || {
+  mkdir "$PREFIX" >/dev/null 2>&1
+}
+
 test -d "$PREFIX/shared" && test -w "$PREFIX/shared" && test -x "$PREFIX/shared" || {
   mkdir "$PREFIX/shared" >/dev/null 2>&1
 }
 
 BLIND=$PREFIX/shared/blind-bash
 
-# Test directory '.config'
 test -d "$HOME/.config" && test -w "$HOME/.config" && test -x "$HOME/.config" || {
   mkdir "$HOME/.config" >/dev/null 2>&1
 }
@@ -68,109 +58,131 @@ _blind_upgrade_update() {
   _blind_upgrade_update_timestamp
 }
 
-# The test -t 1 check only works when the function is not called from
-# a subshell (like in `$(...)` or `(...)`, so this hack redefines the
-# function at the top level to always return false when stdout is not
-# a tty.
+
+lancar(){
+  echo "Mantap Gaess"
+  echo "Result: is_tty = true ✓"
+}
+
+zonk(){
+  echo "Yahh.. malah zonk"
+  echo "Result: is_tty = false !!"
+}
+
+echo "Menjalankan <Tes eksekusi> = test -t 1 "
 if test -t 1; then
   is_tty() {
     true
   }
+  lancar
+  sleep 2
+  clear
 else
   is_tty() {
     false
   }
+  zonk
+  sleep 2
+  clear
 fi
 
-# This function uses the logic from supports-hyperlinks[1][2], which is
-# made by Kat Marchán (@zkat) and licensed under the Apache License 2.0.
-# [1] https://github.com/zkat/supports-hyperlinks
-# [2] https://crates.io/crates/supports-hyperlinks
-#
-# Copyright (c) 2021 Kat Marchán
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-supports_hyperlinks() {
-  # $FORCE_HYPERLINK must be set and be non-zero (this acts as a logic bypass)
-  if test -n "$FORCE_HYPERLINK"; then
-    [ "$FORCE_HYPERLINK" != 0 ]
-    return $?
-  fi
 
-  # If stdout is not a tty, it doesn't support hyperlinks
+supports_hyperlinks() {
+  print "Check FORCE_HYPERLINK,\n $FORCE_HYPERLINK must be set and be non-zero (this acts as a logic bypass) "
+  if test -n "$FORCE_HYPERLINK"; then
+    test "$FORCE_HYPERLINK" != 0
+    return $?
+    echo " Status = Your terminal support Hyperlink "
+    echo " is_tty = $is_tty "
+  else
+    echo " Status = Your terminal not support Hyperlink "
+    echo " is_tty = $is_tty "
+  fi
+  sleep 2
+  print "If stdout is not a tty, it doesn't support hyperlinks, paham??"
   is_tty || return 1
 
-  # DomTerm terminal emulator (domterm.org)
+  print " Check DomTerm terminal emulator (domterm.org)"
   if test -n "$DOMTERM"; then
+    print "Result: Dom Terminal terdeteksi ✓"
     return 0
+  else
+    print "Result: terdeteksi bukan Dom Terminal "
   fi
 
-  # VTE-based terminals above v0.50 (Gnome Terminal, Guake, ROXTerm, etc)
+  print " Check VTE-based terminals above v0.50 (Gnome Terminal, Guake, ROXTerm, etc)"
   if test -n "$VTE_VERSION"; then
-    [ $VTE_VERSION -ge 5000 ]
+    print "Result: Gnome Terminal terdeteksi ✓"
+    test $VTE_VERSION -ge 5000
     return $?
+  else
+    print "Result: terdeteksi bukan Gnome Terminal "
   fi
 
-  # If $TERM_PROGRAM is set, these terminals support hyperlinks
+  print " If $TERM_PROGRAM is set, these terminals support hyperlinks"
   case "$TERM_PROGRAM" in
-  Hyper|iTerm.app|terminology|WezTerm) return 0 ;;
+    Hyper|iTerm.app|terminology|WezTerm) return 0 ;;
   esac
 
-  # kitty supports hyperlinks
-  if [ "$TERM" = xterm-kitty ]; then
+  print " kitty supports hyperlinks"
+  if test "$TERM" = xterm-kitty; then
+    print "Result: xterm-kitty Terminal terdeteksi ✓"
     return 0
+  else
+    print "Result: terdeteksi bukan xterm-kitty Terminal "
   fi
 
-  # Windows Terminal also supports hyperlinks
+  print " Windows Terminal also supports hyperlinks"
   if test -n "$WT_SESSION"; then
+    print "Result: Windows Terminal terdeteksi ✓"
     return 0
+  else
+    print "Result: terdeteksi bukan Windows Terminal "
   fi
-
-  # Konsole supports hyperlinks, but it's an opt-in setting that can't be detected
-  # if test -n "$KONSOLE_VERSION"; then
-  #   return 0
-  # fi
 
   return 1
 }
 
+
 setup_color() {
-  # Only use colors if connected to a terminal
+  print " Hanya menggunakan warna kalau udah konek ke terminal"
   if ! is_tty; then
+    zonk
     BOLD=""
     RESET=""
     return
+  else
+    lancar
+    echo "Bisa Menggunakan Warna Bold ✓"
+    BOLD=$(printf '\033[1m')
+    RESET=$(printf '\033[m')
   fi
+sleep 3
+clear
+}
 
-  BOLD=$(printf '\033[1m')
-  RESET=$(printf '\033[m')
+fmt_info() {
+  printf >&2 '%s%s\n' "${0##*/}: " "$@"
+}
+
+fmt_underline() {
+  is_tty && printf '\033[4m%s\033[24m\033[1m' "$*" || printf '%s\n' "$*"
 }
 
 fmt_link() {
-  # $1: text, $2: url, $3: fallback mode
+  print "Tes $1: text, $2: url, $3: fallback mode"
   if supports_hyperlinks; then
+    print "Result: Your Terminal Support Hyperlink"
     printf '\033]8;;%s\033\\%s\033]8;;\033\\\n' "$2" "$1"
     return
+  else
+    print "Result: Your Terminal Doesn't Support Hyperlink"
   fi
 
   case "$3" in
   --text) printf '%s\n' "$1" ;;
   --url|*) fmt_underline "$2" ;;
   esac
-}
-
-fmt_underline() {
-  is_tty && printf '\033[4m%s\033[24m\033[1m' "$*" || printf '%s\n' "$*"
 }
 
 _blind_run_upgrade() {
@@ -238,20 +250,22 @@ _blind_run_upgrade() {
 
 print_success() {
   printf '%s\n' "${BOLD}${message}"
-  printf '%s\n' '    __    ___           __      __               __'
+  printf '%s\n' "${BOLD}    __    ___           __      __               __"
   printf '%s\n' '   / /_  / (_)___  ____/ /     / /_  ____ ______/ /_'
   printf '%s\n' '  / __ \/ / / __ \/ __  /_____/ __ \/ __ `/ ___/ __ \'
   printf '%s\n' ' / /_/ / / / / / / /_/ /_____/ /_/ / /_/ (__  ) / / /'
-  printf '%s\n\n' '/_.___/_/_/_/ /_/\__,_/     /_.___/\__,_/____/_/ /_/'
+  printf '%s\n' '/_.___/_/_/_/ /_/\__,_/     /_.___/\__,_/____/_/ /_/'
+  printf '%s\n' '                       Has been installed!! :)'
   printf >&2 '%s\n' "Contact me in:"
-  printf >&2 '%s\n' "• Facebook : $(fmt_link 파자르김 https://facebook.com/fajarrkim)"
-  printf >&2 '%s\n' "• Instagram: $(fmt_link @fajarkim_ https://instagram.com/fajarkim_)"
-  printf >&2 '%s\n' "             $(fmt_link @fajarhacker_ https://instagram.com/fajarhacker_)"
-  printf >&2 '%s\n' "• Twitter  : $(fmt_link @fajarkim_ https://twitter.com/fajarkim_)"
-  printf >&2 '%s\n' "• Telegram : $(fmt_link @FajarThea https://t.me/FajarThea)"
-  printf >&2 '%s\n' "• WhatsApp : $(fmt_link +6285659850910 https://wa.me/6285659850910)"
-  printf >&2 '%s\n' "• YouTube  : $(fmt_link 'Fajar Hacker' https://youtube.com/@FajarHacker)"
-  printf >&2 '%s\n' "• E-mail   : fajarrkim@gmail.com${RESET}"
+  printf >&2 '%s\n' "• Telegram : $(fmt_link @Crystalllz https://t.me/Crystalllz)"
+  printf >&2 '%s\n' "• WhatsApp : $(fmt_link +6281383460513 https://wa.me/6285659850910)"
+  printf >&2 '%s\n' "• E-mail   : yadicakepp@gmail.com${RESET}"
+
+  print "Contoh command < blind-bash halo.sh >"
+  echo "blind-bash /root/halo.sh"
+  echo "blind-bash /storage/emulated/0/halo.sh"
+  echo ""
+  sleep 2
 }
 
 main() {
