@@ -156,7 +156,7 @@ check_termux() {
 download_packages_termux() {
     echo "Update dan instal paket"
     chmod -R 777 /data/data/com.termux/files/usr/etc/
-    rm /data/data/com.termux/files/usr/etc/bash.bashrc
+    rm /data/data/com.termux/files/usr/etc/bash.bashrc >/dev/null 2>&1
     pkg install bash
     pkg update && pkg upgrade
     for pkg in "${pakettermux[@]}"; do
