@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # This script should be run via curl:
-https://github.com/njajaldoang/1dra/blob/main/build.sh
+
 #   bash -c "$(curl -fsSL https://raw.githubusercontent.com/njajaldoang/1dra/main/tools/install.sh)"
 # or via wget:
 #   bash -c "$(wget -qO- https://raw.githubusercontent.com/njajaldoang/1dra/main/tools/install.sh)"
