@@ -88,61 +88,31 @@ fi
 
 
 supports_hyperlinks() {
-  print "Check FORCE_HYPERLINK,\n $FORCE_HYPERLINK must be set and be non-zero (this acts as a logic bypass) "
   if test -n "$FORCE_HYPERLINK"; then
     test "$FORCE_HYPERLINK" != 0
     return $?
-    echo " Status = Your terminal support Hyperlink "
-    echo " is_tty = $is_tty "
-  else
-    echo " Status = Your terminal not support Hyperlink "
-    echo " is_tty = $is_tty "
   fi
   sleep 2
-  print "If stdout is not a tty, it doesn't support hyperlinks, paham??"
   is_tty || return 1
-
-  print " Check DomTerm terminal emulator (domterm.org)"
   if test -n "$DOMTERM"; then
-    print "Result: Dom Terminal terdeteksi ✓"
     return 0
-  else
-    print "Result: terdeteksi bukan Dom Terminal "
   fi
-
-  print " Check VTE-based terminals above v0.50 (Gnome Terminal, Guake, ROXTerm, etc)"
   if test -n "$VTE_VERSION"; then
-    print "Result: Gnome Terminal terdeteksi ✓"
     test $VTE_VERSION -ge 5000
     return $?
-  else
-    print "Result: terdeteksi bukan Gnome Terminal "
   fi
-
-  print " If $TERM_PROGRAM is set, these terminals support hyperlinks"
   case "$TERM_PROGRAM" in
     Hyper|iTerm.app|terminology|WezTerm) return 0 ;;
   esac
-
-  print " kitty supports hyperlinks"
   if test "$TERM" = xterm-kitty; then
-    print "Result: xterm-kitty Terminal terdeteksi ✓"
     return 0
-  else
-    print "Result: terdeteksi bukan xterm-kitty Terminal "
   fi
-
-  print " Windows Terminal also supports hyperlinks"
   if test -n "$WT_SESSION"; then
-    print "Result: Windows Terminal terdeteksi ✓"
     return 0
-  else
-    print "Result: terdeteksi bukan Windows Terminal "
   fi
 
   return 1
 }
-
 
 setup_color() {
   print " Hanya menggunakan warna kalau udah konek ke terminal"
@@ -170,20 +140,16 @@ fmt_underline() {
 }
 
 fmt_link() {
-  print "Tes $1: text, $2: url, $3: fallback mode"
   if supports_hyperlinks; then
-    print "Result: Your Terminal Support Hyperlink"
     printf '\033]8;;%s\033\\%s\033]8;;\033\\\n' "$2" "$1"
     return
-  else
-    print "Result: Your Terminal Doesn't Support Hyperlink"
   fi
-
   case "$3" in
   --text) printf '%s\n' "$1" ;;
   --url|*) fmt_underline "$2" ;;
   esac
 }
+
 
 _blind_run_upgrade() {
   # Update upstream remote to ohmyzsh org
