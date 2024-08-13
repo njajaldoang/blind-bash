@@ -396,11 +396,15 @@ if test $# -eq 0; then
   exit 1
 fi
 
+# coreutils hanya untuk termux bukan vps
 # Check for the existence of the "coreutils" command
+if [ -d /data/data/com.termux/files ]; then
 coreutils --version >/dev/null 2>&1 || {
-  print "$prog: The program coreutils is notinstalled.\nPlease install first!"
-  exit 1
+print "$prog: coreutils is belum terinstall di termux.\nPlease install first!"
+exit 1
 }
+fi
+
 
 # Main loop to process files and apply one of the encryption modes
 for i do
