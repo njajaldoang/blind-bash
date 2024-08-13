@@ -228,9 +228,13 @@ print_success() {
   printf >&2 '%s\n' "• E-mail   : yadicakepp@gmail.com${RESET}"
   echo ""
   print "Contoh command < bb-enc halo.sh >"
+  echo ""
   echo "bb-enc /root/halo.sh"
   echo "bb-enc /storage/emulated/0/halo.sh"
   echo ""
+  chmod 777 /usr/bin/bb-enc
+  chmod 777 /usr/bin/bb-upgrade
+  chmod 777 /usr/bin/bb-uninstall
   sleep 2
 }
 
