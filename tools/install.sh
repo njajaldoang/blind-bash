@@ -598,6 +598,7 @@ check_file_uninstall(){
       PATH=/usr/bin
   fi
   print "Your path: $PATH ✓"
+  PATH="$PREFIX/bin"
 sleep 1
   print " Checking file blind-bash.sh "
   check_file_utama
