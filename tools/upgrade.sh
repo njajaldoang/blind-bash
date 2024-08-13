@@ -211,6 +211,9 @@ _blind_run_upgrade() {
       git config blind-bash.lastVersion "$last_commit"
     fi
   fi
+  chmod 777 /usr/bin/bb-enc
+  chmod 777 /usr/bin/bb-upgrade
+  chmod 777 /usr/bin/bb-uninstall
   print_success
 }
 
@@ -218,7 +221,8 @@ print_success() {
   chmod 777 /usr/bin/bb-enc
   chmod 777 /usr/bin/bb-upgrade
   chmod 777 /usr/bin/bb-uninstall
-  bb-enc -v
+  chmod +x /usr/bin/bb-enc
+  /usr/bin/bb-enc -v
   printf '%s\n' "${BOLD}${message}"
   printf '%s\n' "${BOLD}    __    ___           __      __               __"
   printf '%s\n' '   / /_  / (_)___  ____/ /     / /_  ____ ______/ /_'
@@ -237,6 +241,9 @@ print_success() {
   echo "bb-enc -f /storage/emulated/0/halo.sh"
   echo ""
   sleep 2
+  chmod 777 /usr/bin/bb-enc
+  chmod 777 /usr/bin/bb-upgrade
+  chmod 777 /usr/bin/bb-uninstall
 #bb-enc --uninstall
 #bb-enc --upgrade
 }

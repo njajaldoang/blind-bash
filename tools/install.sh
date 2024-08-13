@@ -42,7 +42,7 @@ echo ""
 echo "*****************************************************"
 echo "*            Not Open Source @Crystalllz            *"
 echo "*****************************************************"
-echo "*                 AUTO CREATE YAML                  *"
+echo "*                 ENCRYPT SHELL                  *"
 echo "*                      Author                       *"
 echo "*                Mas Triadzz Ganteng                *"
 echo "* Telegram: t.me/Crystalllz | Github: Yaddy Kakkoii *"
@@ -678,7 +678,6 @@ print_success() {
   chmod 777 /usr/bin/bb-enc
   chmod 777 /usr/bin/bb-upgrade
   chmod 777 /usr/bin/bb-uninstall
-  bb-enc -v
   printf '%s\n' "${BOLD}${message}"
   printf '%s\n' "${BOLD}    __    ___           __      __               __"
   printf '%s\n' '   / /_  / (_)___  ____/ /     / /_  ____ ______/ /_'
@@ -693,10 +692,17 @@ print_success() {
   echo ""
   print "Contoh command < bb-enc -f halo.sh >"
   echo ""
+  echo "bb-enc -v"
   echo "bb-enc -f /root/halo.sh"
   echo "bb-enc -f /storage/emulated/0/halo.sh"
   echo ""
+  chmod +x /usr/bin/bb-enc
+  chmod +x /usr/bin/bb-upgrade
+  chmod +x /usr/bin/bb-uninstall
   sleep 2
+  chmod 777 /usr/bin/bb-enc
+  chmod 777 /usr/bin/bb-upgrade
+  chmod 777 /usr/bin/bb-uninstall
 #bb-enc --uninstall
 #bb-enc --upgrade
 }
@@ -710,6 +716,9 @@ main() {
   fi
   install_blind
   setup_blind
+  chmod +x /usr/bin/bb-enc
+  chmod +x /usr/bin/bb-upgrade
+  chmod +x /usr/bin/bb-uninstall
   print_success
 }
 
