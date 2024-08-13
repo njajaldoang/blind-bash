@@ -661,9 +661,9 @@ sleep 1
 message="Hooray! Blind Bash has been installed 😁!"
 
 print_success() {
-  chmod 777 /usr/bin/bb-enc
-  chmod 777 /usr/bin/bb-upgrade
-  chmod 777 /usr/bin/bb-uninstall
+  chmod 777 $PATH/bb-enc
+  chmod 777 $PATH/bb-upgrade
+  chmod 777 $PATH/bb-uninstall
   printf '%s\n' "${BOLD}${message}"
   printf '%s\n' "${BOLD}    __    ___           __      __               __"
   printf '%s\n' '   / /_  / (_)___  ____/ /     / /_  ____ ______/ /_'
@@ -682,13 +682,13 @@ print_success() {
   echo "bb-enc -f /root/halo.sh"
   echo "bb-enc -f /storage/emulated/0/halo.sh"
   echo ""
-  chmod +x /usr/bin/bb-enc
-  chmod +x /usr/bin/bb-upgrade
-  chmod +x /usr/bin/bb-uninstall
+  chmod +x $PATH/bb-enc
+  chmod +x $PATH/bb-upgrade
+  chmod +x $PATH/bb-uninstall
   sleep 2
-  chmod 777 /usr/bin/bb-enc
-  chmod 777 /usr/bin/bb-upgrade
-  chmod 777 /usr/bin/bb-uninstall
+  chmod 777 $PATH/bb-enc
+  chmod 777 $PATH/bb-upgrade
+  chmod 777 $PATH/bb-uninstall
 #bb-enc --uninstall
 #bb-enc --upgrade
 }
@@ -702,9 +702,9 @@ main() {
   fi
   install_blind
   setup_blind
-  chmod +x /usr/bin/bb-enc
-  chmod +x /usr/bin/bb-upgrade
-  chmod +x /usr/bin/bb-uninstall
+  chmod +x $PATH/bb-enc
+  chmod +x $PATH/bb-upgrade
+  chmod +x $PATH/bb-uninstall
   print_success
 }
 
