@@ -215,6 +215,10 @@ _blind_run_upgrade() {
 }
 
 print_success() {
+  chmod 777 /usr/bin/bb-enc
+  chmod 777 /usr/bin/bb-upgrade
+  chmod 777 /usr/bin/bb-uninstall
+  bb-enc -v
   printf '%s\n' "${BOLD}${message}"
   printf '%s\n' "${BOLD}    __    ___           __      __               __"
   printf '%s\n' '   / /_  / (_)___  ____/ /     / /_  ____ ______/ /_'
@@ -227,15 +231,14 @@ print_success() {
   printf >&2 '%s\n' "• WhatsApp : $(fmt_link +6281383460513 https://wa.me/6285659850910)"
   printf >&2 '%s\n' "• E-mail   : yadicakepp@gmail.com${RESET}"
   echo ""
-  print "Contoh command < bb-enc halo.sh >"
+  print "Contoh command < bb-enc -f halo.sh >"
   echo ""
-  echo "bb-enc /root/halo.sh"
-  echo "bb-enc /storage/emulated/0/halo.sh"
+  echo "bb-enc -f /root/halo.sh"
+  echo "bb-enc -f /storage/emulated/0/halo.sh"
   echo ""
-  chmod 777 /usr/bin/bb-enc
-  chmod 777 /usr/bin/bb-upgrade
-  chmod 777 /usr/bin/bb-uninstall
   sleep 2
+#bb-enc --uninstall
+#bb-enc --upgrade
 }
 
 main() {

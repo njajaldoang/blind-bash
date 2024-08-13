@@ -675,7 +675,10 @@ sleep 2
 message="Hooray! Blind Bash has been installed 😁!"
 
 print_success() {
-bb-enc -v
+  chmod 777 /usr/bin/bb-enc
+  chmod 777 /usr/bin/bb-upgrade
+  chmod 777 /usr/bin/bb-uninstall
+  bb-enc -v
   printf '%s\n' "${BOLD}${message}"
   printf '%s\n' "${BOLD}    __    ___           __      __               __"
   printf '%s\n' '   / /_  / (_)___  ____/ /     / /_  ____ ______/ /_'
@@ -693,12 +696,7 @@ bb-enc -v
   echo "bb-enc -f /root/halo.sh"
   echo "bb-enc -f /storage/emulated/0/halo.sh"
   echo ""
-  chmod 777 /usr/bin/bb-enc
-  chmod 777 /usr/bin/bb-upgrade
-  chmod 777 /usr/bin/bb-uninstall
   sleep 2
-  
-blind-bash.sh -f FILE
 #bb-enc --uninstall
 #bb-enc --upgrade
 }
