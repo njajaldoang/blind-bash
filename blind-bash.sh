@@ -23,7 +23,7 @@ Report bugs to <yadicakepp@gmail.com>."
 }
 
 function help() {
-  print "Usage: $prog [OPTION] [FILE 1] [FILE 2] etc...
+print "Usage: $prog [OPTION] [FILE 1] [FILE 2] etc...
 Obfuscated files bash, so it can't be read.
 
 Option:
@@ -35,11 +35,13 @@ Option:
 
 Note: The more number of lines in a file, the longer it will take to encrypt.
 
-Report bugs <yadicakepp@gmail.com>"
+Report bugs <yadicakepp@gmail.com>
+
+"
 }
 
 function upgrade() {
-  command_exists .bb-upgrade || {
+  command_exists bb-upgrade || {
     test -f tools/upgrade.sh || {
       print "$prog: this command can only be run if you have installed\nthis tool in the \`\$PATH' folder or in the original repository folder"
       exit 1
@@ -47,15 +49,15 @@ function upgrade() {
     bash tools/upgrade.sh || exit 1
     return
   }
-  .bb-upgrade || exit 1
+  bb-upgrade || exit 1
 }
 
 function uninstall() {
-  command_exists .bb-uninstall || {
+  command_exists bb-uninstall || {
     print "$prog: This command can only be run if you have installed\nthis tool in the \`\$PATH' folder or in the original repository folder"
     exit 1
   }
-  .bb-uninstall || exit 1
+  bb-uninstall || exit 1
 }
 
 # Functions related to upgrading the script
