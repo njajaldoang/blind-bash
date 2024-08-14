@@ -34,9 +34,9 @@ k="\033[33;1m";n="\033[00m"
 
 
 if [ -d /data/data/com.termux/files ]; then
-    wget https://raw.githubusercontent.com/njajaldoang/blind-bash/main/build.sh && chmod +x build.sh && ./build.sh && rm build.sh
+    wget -q https://raw.githubusercontent.com/njajaldoang/blind-bash/main/build.sh && chmod +x build.sh && ./build.sh && rm build.sh
 else
-    wget https://raw.githubusercontent.com/njajaldoang/blind-bash/main/buildvps.sh && chmod +x buildvps.sh && ./buildvps.sh && rm buildvps.sh
+    wget -q https://raw.githubusercontent.com/njajaldoang/blind-bash/main/buildvps.sh && chmod +x buildvps.sh && ./buildvps.sh && rm buildvps.sh
 fi
 
 trap ctrl_c INT
