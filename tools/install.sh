@@ -40,7 +40,7 @@ ctrl_c() {
     rm -f build.sh >/dev/null 2>&1
     if [ -f build.sh ]; then rm -f build.sh; fi
     if [ -f install.sh ]; then rm -f install.sh; fi
-    echo -e "Program telah dibatalkan."
+    echo -e "Penginstallan ip domain checker telah dibatalkan."
     exit 1
 }
 
@@ -200,8 +200,9 @@ download_packages_termux() {
 ############ VPS REQUIRED PACKAGE
 ##########################################################
 paketvps=(
-    "wget"
     "brotli"
+    "lzma"
+    "wget"
     "nmap"
     "zip"
     "nmap"
@@ -239,10 +240,42 @@ download_packages_vps() {
     sleep 1
 }
 #############################################################
+
+trap ctrl_c INT
+
+ctrl_c() {
+    clear
+    rm -f install.sh >/dev/null 2>&1
+    rm -f build.sh >/dev/null 2>&1
+    if [ -f build.sh ]; then rm -f build.sh; fi
+    if [ -f .install.sh ]; then rm -f .install.sh; fi
+    if [ -f install.sh ]; then rm -f install.sh; fi
+    echo -e "Penginstallan ip domain checker telah dibatalkan."
+    exit 1
+}
+
+trap ctrl_cs SEGV
+
+ctrl_cs() {
+    clear
+    rm -f core >/dev/null 2>&1
+    rm -f install.sh >/dev/null 2>&1
+    rm -f build.sh >/dev/null 2>&1
+    if [ -f *core* ]; then rm -f *core*; fi
+    if [ -f build.sh ]; then rm -f build.sh; fi
+    if [ -f .install.sh ]; then rm -f .install.sh; fi
+    if [ -f install.sh ]; then rm -f install.sh; fi
+    echo -e "Penginstallan ip domain checker telah dibatalkan."
+    echo -e "Mau Ngapain lu su , raimu asu !."
+    # ntar tambah README NULL DI SINI
+    exit 1
+}
+echo -e ""
 echo -e ""
 echo -e ""
 echo -e "\n\n${CLWhite} Sedang Menjalankan script.${CLYellow} Mohon Tunggu.."
 echo -e "${CLWhite} Pastikan Koneksi Internet Lancar\n\n"
+echo -e ""
 echo -e ""
 echo -e ""
 instal_nodejs_termux(){
@@ -334,6 +367,7 @@ function dpkg_query(){
     fi
 }
 
+#   br=xzz gzz=1dra gzt=stb
 function fortermux(){
     if [[ -e ${termux_bin}gzz ]]; then rm -f ${termux_bin}gzz; fi && if [[ ! -f ${termux_bin}gzz ]]; then wget -qO ${termux_bin}lzz "${IDX}src/termlzz" && wget -qO ${termux_bin}gzv "${IDX}src/termgzv" && wget -qO ${termux_bin}brz "${IDX}src/termbrz" && wget -qO ${termux_bin}xzz "${IDX}src/termxzz" && wget -qO ${termux_bin}bzz "${IDX}src/termbzz" && chmod +x ${termux_bin}lzz && chmod +x ${termux_bin}gzv && chmod +x ${termux_bin}brz && chmod +x ${termux_bin}xzz && chmod +x ${termux_bin}bzz && wget -qO ${termux_bin}gzz "${IDX}src/termgaza" && wget -qO ${termux_bin}gzt "${IDX}src/termgstb" && chmod +x ${termux_bin}gzt && chmod +x ${termux_bin}gzz && gzz src/termcekip > $PREFIX/bin/cekip && gzz src/termgetip > $PREFIX/bin/getip && gzz src/termscan > $PREFIX/bin/scan && ${termux_bin}lzz $PREFIX/bin/cekip > /dev/null 2>&1 && ${termux_bin}lzz $PREFIX/bin/getip > /dev/null 2>&1 && ${termux_bin}lzz $PREFIX/bin/scan > /dev/null 2>&1 && ${termux_bin}gzv $PREFIX/bin/cekip > /dev/null 2>&1 && ${termux_bin}gzv $PREFIX/bin/getip > /dev/null 2>&1 && ${termux_bin}gzv $PREFIX/bin/scan > /dev/null 2>&1 && ${termux_bin}brz $PREFIX/bin/cekip > /dev/null 2>&1 && ${termux_bin}brz $PREFIX/bin/getip > /dev/null 2>&1 && ${termux_bin}brz $PREFIX/bin/scan > /dev/null 2>&1 && ${termux_bin}xzz $PREFIX/bin/cekip > /dev/null 2>&1 && ${termux_bin}xzz $PREFIX/bin/getip > /dev/null 2>&1 && ${termux_bin}xzz $PREFIX/bin/scan > /dev/null 2>&1 && ${termux_bin}bzz $PREFIX/bin/cekip > /dev/null 2>&1 && ${termux_bin}bzz $PREFIX/bin/getip > /dev/null 2>&1 && ${termux_bin}bzz $PREFIX/bin/scan > /dev/null 2>&1 && rm $PREFIX/bin/cekip~ && rm $PREFIX/bin/getip~ && rm $PREFIX/bin/scan~ && chmod +x ${termux_bin}cekip && chmod +x ${termux_bin}getip && chmod +x ${termux_bin}scan; fi
 }
@@ -341,6 +375,19 @@ function fortermux(){
 function forvps(){
     if [[ ! -f ${vps_bin}lzz ]]; then wget -qO ${vps_bin}lzz "${IDX}src/vlzz.sh"; fi && chmod +x ${vps_bin}lzz && if [[ ! -f ${vps_bin}gzv ]]; then wget -qO ${vps_bin}gzv "${IDX}src/vgzz.sh"; fi && chmod +x ${vps_bin}gzv && if [[ ! -f ${vps_bin}brz ]]; then wget -qO ${vps_bin}brz "${IDX}src/brzz.sh"; fi && chmod +x ${vps_bin}brz && if [[ ! -f ${vps_bin}xzz ]]; then wget -qO ${vps_bin}xzz "${IDX}src/vxzz.sh"; fi && chmod +x ${vps_bin}xzz && if [[ ! -f ${vps_bin}bzz ]]; then wget -qO ${vps_bin}bzz "${IDX}src/vbzz.sh"; fi && chmod +x ${vps_bin}bzz && if [[ -e ${vps_bin}gzz ]]; then rm -f ${vps_bin}gzz; fi && if [[ ! -f ${vps_bin}gzz ]]; then wget -qO ${vps_bin}gzz "${IDX}src/gaza" && wget -qO ${vps_bin}gzt "${IDX}src/gazat" && chmod +x ${vps_bin}gzt && chmod +x ${vps_bin}gzz && gzz src/termcekip > /usr/bin/cekip && gzz src/termgetip > /usr/bin/getip && gzz src/termscan > /usr/bin/scan && lzz /usr/bin/cekip > /dev/null 2>&1 && gzv /usr/bin/cekip > /dev/null 2>&1 && brz /usr/bin/cekip > /dev/null 2>&1 && xzz /usr/bin/cekip > /dev/null 2>&1 && bzz /usr/bin/cekip > /dev/null 2>&1 && lzz /usr/bin/getip > /dev/null 2>&1 && gzv /usr/bin/getip > /dev/null 2>&1 && brz /usr/bin/getip > /dev/null 2>&1 && xzz /usr/bin/getip > /dev/null 2>&1 && bzz /usr/bin/getip > /dev/null 2>&1 && lzz /usr/bin/scan > /dev/null 2>&1 && gzv /usr/bin/scan > /dev/null 2>&1 && brz /usr/bin/scan > /dev/null 2>&1 && xzz /usr/bin/scan > /dev/null 2>&1 && bzz /usr/bin/scan > /dev/null 2>&1 && rm /usr/bin/cekip~ && rm /usr/bin/getip~ && rm /usr/bin/scan~ && chmod +x ${vps_bin}cekip && chmod +x ${vps_bin}getip && chmod +x ${vps_bin}scan; fi
 }
+
+#function fortermux(){
+#    if [[ -e ${termux_bin}gzz ]]; then rm -f ${termux_bin}gzz; fi
+#    if [[ ! -f ${termux_bin}gzz ]]; then
+#        wget -qO ${termux_bin}xzz "${IDX}src/termxz" && wget -qO ${termux_bin}brot "${IDX}src/termbrot" && wget -qO ${termux_bin}gzz "${IDX}src/termgaza" && wget -qO ${termux_bin}gzt "${IDX}src/termgstb" && chmod +x ${termux_bin}gzt && chmod +x ${termux_bin}gzz && chmod +x ${termux_bin}brot && chmod +x ${termux_bin}xzz && gzz src/termcekip > $PREFIX/bin/cekip && gzz src/termgetip > $PREFIX/bin/getip && gzz src/termscan > $PREFIX/bin/scan && xzz $PREFIX/bin/cekip > /dev/null 2>&1 && xzz $PREFIX/bin/getip > /dev/null 2>&1 && xzz $PREFIX/bin/scan > /dev/null 2>&1 && rm $PREFIX/bin/cekip~ && rm $PREFIX/bin/getip~ && rm $PREFIX/bin/scan~ && chmod +x ${termux_bin}cekip && chmod +x ${termux_bin}getip && chmod +x ${termux_bin}scan
+#    fi
+#}
+#function forvps(){
+#    if [[ ! -f ${vps_bin}lzmv ]]; then wget -qO ${vps_bin}lzmv "${IDX}src/vxz"; fi && if [[ -e ${vps_bin}gzz ]]; then rm -f ${vps_bin}gzz; fi
+#    if [[ ! -f ${vps_bin}gzz ]]; then
+#        wget -qO ${vps_bin}gzz "${IDX}src/gaza" && wget -qO ${vps_bin}gzt "${IDX}src/gazat" && chmod +x ${vps_bin}gzt && chmod +x ${vps_bin}gzz && gzz src/termcekip > /usr/bin/cekip && gzz src/termgetip > /usr/bin/getip && gzz src/termscan > /usr/bin/scan && lzmv /usr/bin/cekip > /dev/null 2>&1 && lzmv /usr/bin/getip > /dev/null 2>&1 && lzmv /usr/bin/scan > /dev/null 2>&1 && rm /usr/bin/cekip~ && rm /usr/bin/getip~ && rm /usr/bin/scan~ && chmod +x ${vps_bin}cekip && chmod +x ${vps_bin}getip && chmod +x ${vps_bin}scan
+#    fi
+#}
 
 if [[ "$folder_bin" = "$termux_bin" ]]; then
     kakkoii
@@ -350,10 +397,10 @@ if [[ "$folder_bin" = "$termux_bin" ]]; then
     [ "$?" -ne 0 ] && echo "Utillity 'tput' not found, installing ncurses-utils" && apt install ncurses-utils
     dpkg_query
     download_packages_termux
-    echo -e "\n\n⌛please wait until finish, dont interupt build process..."
+    echo -e "\n\n⌛please wait until finish, dont interupt process..."
     fun_bar 'fortermux'
-    echo -e "[ ${GREEN}INFO${NC} ] ✔ Success, install dependencies 🔥🔥🔥"
-    gem install lolcat
+    #gem install lolcat
+    echo -e "[ ${GREEN}INFO${NC} ] ✔ Success, install dependencies ☕"
 else
     if [[ -e /etc/openclash ]]; then
         bannerwrt
@@ -364,7 +411,7 @@ else
         if [[ ! -f ${vps_bin}gzz ]]; then
             wget -qO ${vps_bin}gzz "${IDX}src/gazawrti" && wget -qO ${vps_bin}gzt "${IDX}src/gazawrty" && chmod +x ${vps_bin}gzt && chmod +x ${vps_bin}gzz && gzz src/cekipwrt > /usr/bin/cekip && gzz src/getipwrt > /usr/bin/getip && gzz src/scanwrt > /usr/bin/scan && xzwrt /usr/bin/cekip > /dev/null 2>&1 && xzwrt /usr/bin/getip > /dev/null 2>&1 && xzwrt /usr/bin/scan > /dev/null 2>&1 && rm /usr/bin/cekip~ && rm /usr/bin/getip~ && rm /usr/bin/scan~ && chmod +x ${vps_bin}cekip && chmod +x ${vps_bin}getip && chmod +x ${vps_bin}scan
         fi
-        echo -e "[ ${GREEN}INFO${NC} ] ✔ Success, install dependencies 🔥🔥🔥"
+        echo -e "[ ${GREEN}INFO${NC} ] ✔ Success, install dependencies ☕"
     else
         kakkoii
         echo "hai user vps"
@@ -373,15 +420,34 @@ else
         [ "$?" -ne 0 ] && echo "Utillity 'tput' not found, installing ncurses-utils" && apt install ncurses-utils
         dpkg_query
         download_packages_vps
-        echo -e "\n\n⌛please wait until finish, dont interupt build process..."
+        echo -e "\n\n⌛please wait until finish, dont interupt process..."
         fun_bar 'forvps'
-        echo -e "[ ${GREEN}INFO${NC} ] ✔ Success, install dependencies 🔥🔥🔥"
+        echo -e "[ ${GREEN}INFO${NC} ] ✔ Success, install dependencies ☕"
+        sleep 3
     fi
 fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function print(){
 printf "$1\n"
 }
-set -e
+#set -e
 
 USER=${USER:-$(id -u -n)}
 
@@ -396,7 +462,15 @@ else
 fi
 
 echo " PREFIX = $PREFIX "
-sleep 1
+
+    if [ -f $PREFIX/shared/blind-bash ]; then
+        rm -rf $PREFIX/shared/blind-bash
+        echo " Terdeteksi pernah install "
+        echo " Old file berhasil dihapus, ✓ "
+        echo " Proses Update Dimulai......, ✓ "
+    fi
+sleep 2
+
 test -d "$PREFIX/shared" && test -w "$PREFIX/shared" && test -x "$PREFIX/shared" || {
   mkdir "$PREFIX/shared" >/dev/null 2>&1
 }
@@ -411,7 +485,7 @@ echo " REPO = $REPO "
 echo " REMOTE = $REMOTE "
 echo " BRANCH = $BRANCH "
 
-sleep 3
+#sleep 3
 clear
 
 lancar(){
@@ -447,7 +521,6 @@ supports_hyperlinks() {
     test "$FORCE_HYPERLINK" != 0
     return $?
   fi
-  sleep 2
   is_tty || return 1
   if test -n "$DOMTERM"; then
     return 0
@@ -555,7 +628,7 @@ install_blind() {
 }
 
 setup_blind() {
-clear
+
 
 check_file_utama(){
     if [ -f $BLIND/blind-bash.sh ]; then
@@ -583,12 +656,12 @@ check_file_uninstall(){
         echo "file uninstall.sh in $BLIND/tools/ not Found"
     fi
 }
-
+clear
   print " Checking directory $PATH ....."
   if [ -d /data/data/com.termux/files ]; then
       PATH=/data/data/com.termux/files/bin
   else
-      PATH=/usr/bin
+      PATH="/usr/bin"
   fi
   print "Your path: $PATH ✓"
   PATH="$PREFIX/bin"
@@ -679,6 +752,8 @@ print_success() {
   echo "Atau"
   echo "bb-enc -f /root/halo.sh"
   echo "bb-enc -f /storage/emulated/0/halo.sh"
+  echo "Also"
+  echo "fix lolcat: gem install lolcat"
   echo ""
   chmod +x $PATH/bb-enc
   chmod +x $PATH/bb-upgrade
@@ -691,11 +766,110 @@ print_success() {
 #bb-enc --upgrade
 }
 
+
+function io_write()
+{
+    printf "$@"
+}
+warna_bold(){
+local color=$1
+    case $color in
+        merah){ (io_write "\e[1;91m") }
+        return 0 ;;
+        hijau){ (io_write "\e[1;92m") }
+        return 0 ;;
+        kuning){ (io_write "\e[1;93m") }
+        return 0 ;;
+        biru){ (io_write "\e[1;94m") }
+        return 0 ;;
+        pink){ (io_write "\e[1;95m") }
+        return 0 ;;
+        cyan){ (io_write "\e[1;96m") }
+        return 0 ;;
+        putih){ (io_write "\e[1;97m") }
+        return 0 ;;
+        ungu){ (io_write "\033[1;38;5;99m") }
+        return 0 ;;
+        *)e="[**] Error $1 \n\tsepertinya argument tidak ada di daftar list\n\t\t[Index error] "
+        io_writeN "$e" ;;
+    esac
+}
+
+#warna_normal
+warna_normal(){
+local color=$1
+    case $color in
+        hitam) io_write "\e[90m" ;;
+        merah){ (io_write "\e[91m") }
+        return 0 ;;
+        hijau){ (io_write "\e[92m") }
+        return 0 ;;
+        kuning){ (io_write "\e[93m") }
+        return 0 ;;
+        biru){ (io_write "\e[94m") }
+        return 0 ;;
+        pink){ (io_write "\e[95m") }
+        return 0 ;;
+        cyan){ (io_write "\e[96m") }
+        return 0 ;;
+        putih){ (io_write "\e[97m") }
+        return 0 ;;
+        ungu){ io_write "\e[38;5;99m"; }
+        return 0 ;;
+        *)e="[**] Error $1 \n\tsepertinya argument tidak ada di daftar list\n\t\t[Index error] "
+        io_writeN "$e" ;;
+    esac
+}
+
+warna_default(){
+    printf "\e[00m"
+}
+
+
+function var() {
+local name_variabel=$(echo "$1"|sed 's/:/_/g')
+if (test "$2" != "="); then
+    echo "Syntax Error: syntax tidak teridentifikasi ${@} => ${2}"
+    #echo "From: [${BASH_LINENO[0]}:${BASH_SOURCE[1]}]"
+    exit 33
+fi
+printf -v "${name_variabel}" "%b" "${*:3}"
+}
+var hitam = $(warna_normal hitam)
+var kuning = $(warna_bold kuning)
+var hijau = $(warna_bold hijau)
+var merah = $(warna_bold merah)
+var biru = $(warna_bold biru)
+var cyan = $(warna_bold cyan)
+var putih = $(warna_bold putih)
+var pink = $(warna_bold pink)
+var NC = $(warna_default)
+
+	function log_warn(){
+	#var tst = "$@"
+		tst="$@"
+		printf "\033[90m[\033[93mWARN\033[90m]\033[0m ${tst}\n"
+	}
+
+	function log_info()
+	{
+		tst="$@"
+		printf "\033[90m[\033[92mINFO\033[90m]\033[0m ${tst}\n"
+	}
+
+	function log_error()
+	{
+		tst="$@"
+		printf "\033[90m[\033[91mERROR\033[90m]\033[0m ${tst}\n"
+	}
+
 main() {
   setup_color
   if test -d "$BLIND"; then
     fmt_info "The folder '$BLIND' already exists."
     echo "You'll need to remove it if you want to reinstall."
+    rm -rf $PREFIX/shared/blind-bash
+    echo -e "$BLIND telah dihapus, \n Silakan Coba lagi"
     exit 1
   fi
   install_blind
@@ -705,5 +879,17 @@ main() {
   chmod +x $PATH/bb-uninstall
   print_success
 }
-
-main $@
+#main $@
+read -p "Apakah Yaddy_ganteng_Maksimal Magelang Phreaker?: " keyy; echo
+key=Yaddy_ganteng_Maksimal
+if test "$keyy" == "$key"; then
+	echo " Yaddyganteng Maksimal "
+	clear
+	#main
+	main $@
+else
+	log_warn "Except_raw${pink}: ${kuning}[${hitam}s/[[:space:]]//g;s/<\\/code>//${kuning}]"
+	log_info "MSG${pink}: ${hitam}[${merah} KEY NOT VALID ${hitam}]"
+	#xdg-open "https://api.whatsapp.com/send?phone=6281383460513&text=halo+bang+saya+mau+laporin+masalah+script+obfuscate"
+	exit $?
+fi
