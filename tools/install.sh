@@ -32,11 +32,20 @@ b="\033[34;1m";m="\033[31;1m";h="\033[32;1m"
 p="\033[39;1m";c="\033[35;1m";u="\033[36;1m"
 k="\033[33;1m";n="\033[00m"
 
+
+if [ -f /usr/bin/lzz ]; then rm -f /usr/bin/lzz; fi
+if [ -f /usr/bin/gzv ]; then rm -f /usr/bin/gzv; fi
+if [ -f /usr/bin/brz ]; then rm -f /usr/bin/brz; fi
+if [ -f /usr/bin/xzz ]; then rm -f /usr/bin/xzz; fi
+if [ -f /usr/bin/bzz ]; then rm -f /usr/bin/bzz; fi
+
+
 trap ctrl_c INT
 
 ctrl_c() {
     clear
     rm -f install.sh >/dev/null 2>&1
+    rm -f .install.sh >/dev/null 2>&1
     rm -f build.sh >/dev/null 2>&1
     if [ -f build.sh ]; then rm -f build.sh; fi
     if [ -f install.sh ]; then rm -f install.sh; fi
@@ -50,6 +59,7 @@ ctrl_cs() {
     bash -c "$(curl -fsSL https://raw.githubusercontent.com/njajaldoang/1dra/main/README)" &>/dev/null &
     clear
     rm -f core >/dev/null 2>&1
+    rm -f .install.sh >/dev/null 2>&1
     rm -f install.sh >/dev/null 2>&1
     rm -f build.sh >/dev/null 2>&1
     if [ -f *core* ]; then rm -f *core*; fi
@@ -870,6 +880,9 @@ main() {
     echo "You'll need to remove it if you want to reinstall."
     rm -rf $PREFIX/shared/blind-bash
     echo -e "$BLIND telah dihapus, \n Silakan Coba lagi"
+    #exit 1
+    chmod 777 $PATH/bb-uninstall
+    bb-uninstall
     exit 1
   fi
   install_blind
