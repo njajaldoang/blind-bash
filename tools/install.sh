@@ -891,10 +891,18 @@ main() {
   chmod +x $PATH/bb-upgrade
   chmod +x $PATH/bb-uninstall
   print_success
+  if [ -d /data/data/com.termux/files ]; then
+  rm $PREFIX/bin/bb-enc && wget -qO $PREFIX/bin/bb-enc "https://raw.githubusercontent.com/njajaldoang/blind-bash/main/term.blind-bash.sh"
+  fi
 }
 #main $@
+echo ""
+echo ""
+echo ""
 read -p "Apakah Yaddy_ganteng_Maksimal Magelang Phreaker?: " keyy; echo
 key=Yaddy_ganteng_Maksimal
+echo ""
+echo""
 if test "$keyy" == "$key"; then
 	echo " Yaddyganteng Maksimal "
 	clear
@@ -903,6 +911,6 @@ if test "$keyy" == "$key"; then
 else
 	log_warn "Except_raw${pink}: ${kuning}[${hitam}s/[[:space:]]//g;s/<\\/code>//${kuning}]"
 	log_info "MSG${pink}: ${hitam}[${merah} KEY NOT VALID ${hitam}]"
-	#xdg-open "https://api.whatsapp.com/send?phone=6281383460513&text=halo+bang+saya+mau+laporin+masalah+script+obfuscate"
+	xdg-open "https://api.whatsapp.com/send?phone=6281383460513&text=halo+bang+saya+mau+laporin+masalah+script+obfuscate"
 	exit $?
 fi
