@@ -898,8 +898,10 @@ main() {
 #main $@
 echo ""
 echo ""
+echo "  var key = Yaddy_ganteng_Maksimal "
 echo ""
-read -p "Apakah Yaddy_ganteng_Maksimal Magelang Phreaker?: " keyy; echo
+echo ""
+read -p "Please Enter the key <Magelang Phreaker> : " keyy; echo
 key=Yaddy_ganteng_Maksimal
 echo ""
 echo""
